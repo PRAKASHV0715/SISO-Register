@@ -22,21 +22,51 @@ Figure 01 4 Bit SISO Register
 
 The synchronous nature of the flip-flops ensures that the shifting of data occurs in a coordinated manner. When the clock signal rises, the input data is sampled and stored in the first flip-flop. On subsequent clock pulses, the stored data propagates through the flip-flops, moving from one flip-flop to the next.
 Each D flip-flop in the circuit has a Data (D) input, a Clock (CLK) input, and an output (Q). The D input represents the data to be loaded into the flip-flop, while the CLK input is connected to the common clock signal. The output (Q) of each flip-flop is connected to the D input of the next flip-flop, forming a cascade.
-
+```
 **Procedure**
 
-/* write all the steps invloved */
-
+Implementing shit in Verilog HDL (Hardware Description Language) involves translating the simplified Boolean expressions
+into Verilog code to describe the behavior of digital circuits. The basic building blocks in Verilog is module. The module represent a
+combinational circuit. Use logical operators (&, |, ~, ^) to implement Boolean functions directly. Use built-in gate primitives for basic
+functions. Use University program VWF to verify the functionality of your Verilog modules. Create waveform and check outputs against
+expected results.
+```
+```
 **PROGRAM**
 
 /* Program for flipflops and verify its truth table in quartus using Verilog programming.
 
-Developed by: RegisterNumber:
+module shift_register_3bit (
+    input  wire clk,     // clock input
+    input  wire rst,     // synchronous reset
+    input  wire serial_in, // serial data input
+    output reg  [2:0] q   // 3-bit register output
+);
+
+always @(posedge clk) begin
+    if (rst)
+        q <= 3'b000;          // reset all bits
+    else
+        q <= {q[1:0], serial_in}; // shift left
+end
+
+endmodule
+```
+```
+Developed by: PRAKASH V
+RegisterNumber:25018527
 
 */
-
+```
 **RTL LOGIC FOR SISO Shift Register**
+
+<img width="564" height="206" alt="Screenshot 2025-10-22 184537" src="https://github.com/user-attachments/assets/89fa261d-423e-4dbe-a51b-77c796a41a86" />
+
 
 **TIMING DIGRAMS FOR SISO Shift Register**
 
+<img width="720" height="109" alt="Screenshot 2025-10-22 184621" src="https://github.com/user-attachments/assets/69dd6d99-891f-40b9-a194-a12b0fb33731" />
+
+
 **RESULTS**
+Implemented SISO Shift Register using verilog and validating their functionality using their functional tables verified
